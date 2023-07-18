@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sign Up | Room Management System</title>
+<style>
+body {
+background-image: url("bg-01.jpg");
+background-size: cover;
+background-repeat: no-repeat;
+color: #fff;
+font-family: Arial, sans-serif;
+margin: 0;
+padding: 0;
+}
+
+main {
+padding: 10px;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.signup-container {
+background-color: #333;
+padding: 20px;
+border-radius: 20px;
+box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+display: flex;
+flex-direction: row;
+width: 60%;
+margin: 0 auto;
+min-height: 100vh;
+}
+
+.signup-left {
+flex: 1;
+padding-right: 20px;
+word-wrap: break-word;
+}
+
+.signup-right {
+flex: 1;
+}
+
+.signup-logo {
+max-width: 250px;
+margin-bottom: 10px;
+}
+
+h1 {
+margin-top: 0;
+font-size: 28px;
+}
+
+p {
+font-size: 20px;
+margin-top: 0;
+line-height: 1.6;
+}
+
+label, input {
+display: block;
+margin-bottom: 10px;
+}
+
+label {
+color: #fff;
+font-weight: bold;
+}
+
+input[type="text"], input[type="email"], input[type="password"], select {
+width: 80%;
+padding: 10px;
+border-radius: 5px;
+border: none;
+box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+font-size: 16px;
+}
+
+input[type="submit"] {
+background-color: #4CAF50;
+color: #fff;
+padding: 15px 20px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+font-size: 16px;
+margin-top: 10px;
+}
+
+input[type="submit"]:hover {
+background-color: #3e8e41;
+}
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+  $("form").submit(function(event) {
+    event.preventDefault();
+
+    // Get form data
+    var data = {
+      name: $("#name").val(),
+      email: $("#email").val(),
+      password: $("#password").val(),
+      confirm_password: $("#confirm-password").val(),
+      role: $("#role").val(),
+      dob: $("#dob").val(),
+      gender: $("#gender").val()
+    };
+
+    // Send AJAX request
+    $.ajax({
+      url: "https://localhost:7066/api/Employee",
+      type: "POST",
+      dataType: "json",
+      contentType: "application/json",
+      data: JSON.stringify(data),
+      success: function(response) {
+        // Handle successful response
+        alert("Sign up successful!"); // Show success message
+        // Perform further actions like redirecting or other operations
+      },
+      error: function(xhr, status, error) {
+        // Handle error
+        alert("Sign up failed. Please try again."); // Show error message
+        // Perform error handling, show an error message, etc.
+      }
+    });
+  });
+});
+</script>
+</head>
+<body>
+<main>
+<div class="signup-container">
+<div class="signup-left">
+<h1>Welcome to the Room Management System</h1>
+<p>Are you tired of struggling to manage room bookings and availability? Look no further! Our Room Management System is here to streamline your room management processes and make your life easier. <br><br>• Take control of your room bookings and boost your efficiency. With our solution, you can easily schedule, organize, and manage all your room reservations in one place. <br><br> • Enjoy real-time visibility into room availability, bookings, and resources. Stay on top of your room management, respond to changes, and make informed decisions. <br><br> • Meet the needs of your team and clients. Standardize best practices, increase transparency, and strengthen collaboration. <br><br> • Discover the power of efficient room management. Unlock your team's potential and start using our Room Management System today!</p>
+</div>
+<div class="signup-right">
+<img src="pngegg.png" alt="Logo" class="signup-logo">
+<form method="post" action="signup.php">
+<label for="name">Name:</label>
+<input type="text" id="name" name="name" required>
+<label for="email">Email:</label>
+<input type="email" id="email" name="email" required>
+<label for="password">Password:</label>
+<input type="password" id="password" name="password" required>
+<label for="confirm-password">Confirm Password:</label>
+<input type="password" id="confirm-password" name="confirm-password" required>
+<label for="role">Role:</label>
+<select id="role" name="role" required>
+  <option value="company">Company</option>
+  <option value="admin">Admin</option>
+</select>
+<label for="dob">Date of Birth:</label>
+<input type="text" id="dob" name="dob" required>
+<label for="gender">Gender:</label>
+<select id="gender" name="gender" required>
+  <option value="m">Male</option>
+  <option value="f">Female</option>
+</select>
+<input type="submit" value="Sign up"> 
+</form>
+</div>
+</div>
+</main>
+</body>
+</html>
